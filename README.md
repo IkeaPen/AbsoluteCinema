@@ -8,6 +8,7 @@ Projekto tikslas - suteikti galimybę vartotojams pirkti bilietus į norimus kin
 Norint pilnai išnaudoti visas sistemos funkcijas, naudotojas turi turėti priregistruotą paskyrą ir būti prisijungęs. Prisijungęs naudotojas gali matyti visus kine rodomus filmus, jų seansus ir, paspaudus ant vieno iš seansų, matyti skirtingų bilietų kainas ir laisvas sėdimas vietas kino teatre. Galiausiai, išsirinkus bilieto tipą ir sėdimą vietą, naudotojas gali baigti savo bilieto pirkimą.
 Neužsiregistravę naudotojai gali tik matyti rodomus filmus ir jų seansus, bet negali pasiekti bilietų ir sėdimų vietų pasirinkimo puslapio.
 Administratoriai prižiūri puslapio tvarką – prideda/keičia/ištrina filmus, seansus ir bilietų tipus. Administratoriai taip pat gali atšaukti bilietų pirkimus ir ištrinti naudotojų paskyras.
+<br></br>
 
 ###	FUNKCINIAI REIKALAVIMAI
 ####	Neregistruoto naudotojo funkciniai reikalavimai:
@@ -33,7 +34,7 @@ Administratoriai prižiūri puslapio tvarką – prideda/keičia/ištrina filmus
 * Ištrinti filmą, jo seansus ar bilietų tipus.
 * Atšaukti naudotojų bilietus.
 * Ištrinti naudotojų paskyras.
-
+<br></br>
 
 ##	PASIRINKTŲ TECHNOLOGIJŲ APRAŠYMAS
 Sistemos sudedamosios dalys: 
