@@ -1,0 +1,84 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Movie {
+  id            Int         @id @default(autoincrement())
+  title         String      @db.VarChar(255)
+  studio        String      @db.VarChar(255)
+  description   String?     @db.Text
+  releaseDate   DateTime    @db.Timestamp(6)
+  screenings    Screening[]
+}
+
+model CinemaHall {
+  id            Int         @id @default(autoincrement())
+  name          String      @unique @db.VarChar(80)
+  seats         Seat[]
+  screenings    Screening[]
+}
+
+model Seat {
+  id            Int         @id @default(autoincrement())
+  row           Int
+  number        Int
+  cinemaHallId  Int
+  cinemaHall    CinemaHall  @relation(fields: [cinemaHallId], references: [id])
+  tickets       Ticket[]
+
+  @@unique([cinemaHallId, row, number])
+}
+
+model Screening {
+  id            Int         @id @default(autoincrement())
+  date          DateTime    @db.Timestamp(6)
+  priceRatio    Float       @default(1)
+  movieId       Int
+  cinemaHallId  Int
+  movie         Movie       @relation(fields: [movieId], references: [id], onDelete: Cascade)
+  cinemaHall    CinemaHall  @relation(fields: [cinemaHallId], references: [id], onDelete: Cascade)
+  tickets       Ticket[]
+}
+
+model Ticket {
+  id            Int         @id @default(autoincrement())
+  finalPrice    Float
+  userId        Int
+  screeningId   Int
+  ticketTypeId  Int
+  seatId        Int
+  user          User        @relation(fields: [userId], references: [id])
+  screening     Screening   @relation(fields: [screeningId], references: [id])
+  ticketType    TicketType  @relation(fields: [ticketTypeId], references: [id])
+  seat          Seat        @relation(fields: [seatId], references: [id])
+
+  @@unique([screeningId, seatId])
+}
+
+model TicketType {
+  id            Int         @id @default(autoincrement())
+  price         Float
+  description   String      @db.Text
+  tickets       Ticket[]
+}
+
+model User {
+  id            Int         @id @default(autoincrement())
+  username      String      @unique @db.VarChar(255)
+  passwordHash  String      @db.VarChar(255)
+  email         String      @unique @db.VarChar(255)
+  tickets       Ticket[]
+}
