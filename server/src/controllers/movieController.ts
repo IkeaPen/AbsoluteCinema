@@ -1,13 +1,26 @@
 import { Request, Response, NextFunction } from 'express';
-import { movies, Movie } from '../models/movie';
+import { movieService } from "../services/movieService";
 
-// Read all items
-export const getMovies = (req: Request, res: Response, next: NextFunction) => {
-  try {
-    res.json(movies);
-  } catch (error) {
-    next(error);
+export const movieController = {
+
+  async getMovies(req: Request, res: Response, next: NextFunction) {
+    try {
+      const allMovies = await movieService.listAllMovies();
+      res.json(allMovies);
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  async getMovieById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const movieById = await movieService.listMovieById(req.params.id);
+      res.json(movieById);
+    } catch (error) {
+      next(error);
+    }
   }
+  
 };
 /*
 // Create an item

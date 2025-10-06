@@ -8,6 +8,9 @@
     "dev": "tsx watch src/app.ts",
     "start": "tsx src/app.ts"
   },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
