@@ -55,6 +55,7 @@ model Screening {
 model Ticket {
   id            Int         @id @default(autoincrement())
   finalPrice    Float
+  purchaseDate  DateTime    @default(now()) @db.Timestamp(6)
   userId        Int
   screeningId   Int
   ticketTypeId  Int
@@ -79,5 +80,6 @@ model User {
   username      String      @unique @db.VarChar(255)
   passwordHash  String      @db.VarChar(255)
   email         String      @unique @db.VarChar(255)
+  creationDate  DateTime    @default(now()) @db.Timestamp(6)
   tickets       Ticket[]
 }

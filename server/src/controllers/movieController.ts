@@ -5,7 +5,7 @@ export const movieController = {
 
   async getMovies(req: Request, res: Response, next: NextFunction) {
     try {
-      const allMovies = await movieService.listAllMovies();
+      const allMovies = await movieService.getMovies();
       res.json(allMovies);
     } catch (error) {
       next(error);
@@ -14,13 +14,39 @@ export const movieController = {
 
   async getMovieById(req: Request, res: Response, next: NextFunction) {
     try {
-      const movieById = await movieService.listMovieById(req.params.id);
+      const movieById = await movieService.getMovieById(req.params.id);
       res.json(movieById);
     } catch (error) {
       next(error);
     }
-  }
+  },
   
+  async createMovie(req: Request, res: Response, next: NextFunction) {
+    try {
+      const newMovie = await movieService.createMovie(req.body);
+      return res.status(201).json(newMovie);
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  async updateMovie(req: Request, res: Response, next: NextFunction) {
+    try {
+      const newMovie = await movieService.updateMovie(req.params.id, req.body);
+      return res.status(200).json(newMovie);
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  async deleteMovie(req: Request, res: Response, next: NextFunction) {
+    try {
+      const removedMovie = await movieService.deleteMovie(req.params.id, req.body);
+      return res.status(200).json(removedMovie);
+    } catch (error) {
+      next(error);
+    }
+  },
 };
 /*
 // Create an item

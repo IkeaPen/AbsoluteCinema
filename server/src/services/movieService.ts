@@ -1,19 +1,45 @@
 import { prisma } from "../config/prisma";
+import { Prisma } from "@prisma/client";
 
 export const movieService = {
 
-  async listAllMovies() {
+  async getMovies() {
     return prisma.movie.findMany();
   },
 
-  async listMovieById(id: string) {
+  async getMovieById(id: string) {
     if (Number.isNaN(Number(id))) return null;
-    return prisma.movie.findFirst( {
+    return prisma.movie.findFirst({
       where: {
         id: Number(id)
       }
     })
-  }
+  },
+
+  async createMovie(movieData: Prisma.MovieCreateInput) {
+    return prisma.movie.create({ 
+      data: movieData 
+    });
+  },
+
+  async updateMovie(id: string, movieData: Prisma.MovieCreateInput) {
+    if (Number.isNaN(Number(id))) throw new Error('cannot update movie: id must be a number');
+    return prisma.movie.update({ 
+      where: {
+        id: Number(id)
+      },
+      data: movieData 
+    });
+  },
+
+  async deleteMovie(id: string, movieData: Prisma.MovieCreateInput) {
+    if (Number.isNaN(Number(id))) throw new Error('cannot delete movie: id must be a number');
+    return prisma.movie.delete({ 
+      where: {
+        id: Number(id)
+      }
+    });
+  },
 
   /*async addMovie(input: any) {
     // Example of business rule
