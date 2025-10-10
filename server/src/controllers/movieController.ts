@@ -38,7 +38,7 @@ export const movieController = {
 
   async updateMovie(req: Request, res: Response, next: NextFunction) {
     try {
-     // const id = validateIdParse(req.params.id, "movie ID");
+      const id = validateIdParse(req.params.id, "movie ID");
 
       const newMovie = await movieService.updateMovie(Number(req.params.id), req.body);
       return res.status(200).json(newMovie);

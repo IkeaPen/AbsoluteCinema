@@ -7,11 +7,14 @@ import cinemaHallScreeningRoutes from './routes/cinemaHallScreeningRoutes';
 import cinemaHallSeatRoutes from './routes/cinemaHallSeatRoutes';
 import seatRoutes from './routes/seatRoutes';
 import { errorHandler } from './middlewares/errorHandler';
+import { setupSwagger } from './config/swagger';
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
+
+setupSwagger(app);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Server is up!');

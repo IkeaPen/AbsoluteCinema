@@ -38,7 +38,7 @@ export const errorHandler = (
 function handlePrismaError(error: Prisma.PrismaClientKnownRequestError): AppError {
   switch (error.code) {
     case "P2002":
-      return { ...error, status: 400, message: "Duplicate entry violates unique constraint" };
+      return { ...error, status: 409, message: "Duplicate entry violates unique constraint" };
     case "P2003":
       return { ...error, status: 409, message: "Invalid reference to another record" };
     case "P2025":
