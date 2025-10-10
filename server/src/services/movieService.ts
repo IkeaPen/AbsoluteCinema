@@ -7,11 +7,10 @@ export const movieService = {
     return prisma.movie.findMany();
   },
 
-  async getMovieById(id: string) {
-    if (Number.isNaN(Number(id))) return null;
+  async getMovieById(id: number) {
     return prisma.movie.findFirst({
       where: {
-        id: Number(id)
+        id: id
       }
     })
   },
@@ -22,29 +21,33 @@ export const movieService = {
     });
   },
 
-  async updateMovie(id: string, movieData: Prisma.MovieCreateInput) {
-    if (Number.isNaN(Number(id))) throw new Error('cannot update movie: id must be a number');
+  async updateMovie(id: number, movieData: Prisma.MovieCreateInput) {
     return prisma.movie.update({ 
       where: {
-        id: Number(id)
+        id: id
       },
       data: movieData 
     });
   },
 
-  async deleteMovie(id: string, movieData: Prisma.MovieCreateInput) {
-    if (Number.isNaN(Number(id))) throw new Error('cannot delete movie: id must be a number');
+  async deleteMovie(id: number) {
     return prisma.movie.delete({ 
       where: {
-        id: Number(id)
+        id: id
       }
     });
   },
 
-  /*async addMovie(input: any) {
-    // Example of business rule
-    if (!input.title) throw new Error("Movie must have a title");
-    return MovieRepository.create(input);
-  },*/
+  async checkMovieExists(id: number) {
+    return prisma.movie.findUnique({ 
+      where: { 
+        id: id 
+      },
+      select: { 
+        id: true 
+      },
+    });
+  },
+
 };
 

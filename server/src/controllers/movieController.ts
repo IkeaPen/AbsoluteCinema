@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { movieService } from "../services/movieService";
+import { validateIdParse } from "../validators/idValidators";
+import { createError } from '../middlewares/errorHandler';
 
 export const movieController = {
 
@@ -14,7 +16,11 @@ export const movieController = {
 
   async getMovieById(req: Request, res: Response, next: NextFunction) {
     try {
-      const movieById = await movieService.getMovieById(req.params.id);
+      const id = validateIdParse(req.params.id, "movie ID");
+
+      const movieById = await movieService.getMovieById(id);
+      if (!movieById) throw createError("Movie not found", 404);
+      
       res.json(movieById);
     } catch (error) {
       next(error);
@@ -32,7 +38,9 @@ export const movieController = {
 
   async updateMovie(req: Request, res: Response, next: NextFunction) {
     try {
-      const newMovie = await movieService.updateMovie(req.params.id, req.body);
+     // const id = validateIdParse(req.params.id, "movie ID");
+
+      const newMovie = await movieService.updateMovie(Number(req.params.id), req.body);
       return res.status(200).json(newMovie);
     } catch (error) {
       next(error);
@@ -41,7 +49,9 @@ export const movieController = {
 
   async deleteMovie(req: Request, res: Response, next: NextFunction) {
     try {
-      const removedMovie = await movieService.deleteMovie(req.params.id, req.body);
+      const id = validateIdParse(req.params.id, "movie ID");
+
+      const removedMovie = await movieService.deleteMovie(id);
       return res.status(200).json(removedMovie);
     } catch (error) {
       next(error);

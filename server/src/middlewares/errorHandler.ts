@@ -5,6 +5,12 @@ export interface AppError extends Error {
   status?: number;
 }
 
+export function createError(message: string, status: number): AppError {
+  const error: AppError = new Error(message);
+  error.status = status;
+  return error;
+}
+
 export const errorHandler = (
   err: AppError,
   req: Request,
@@ -14,6 +20,13 @@ export const errorHandler = (
   let handledError = err;
   if (err instanceof Prisma.PrismaClientKnownRequestError) {
     handledError = handlePrismaError(err);
+  }
+  else if (err instanceof Prisma.PrismaClientValidationError) {
+    handledError = {
+      name: "ValidationError",
+      message: "Missing or invalid field in request body.",
+      status: 400,
+    };
   }
 
   console.error(handledError);
