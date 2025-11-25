@@ -6,6 +6,7 @@ import cinemaHallRoutes from './routes/cinemaHallRoutes';
 import cinemaHallScreeningRoutes from './routes/cinemaHallScreeningRoutes';
 import cinemaHallSeatRoutes from './routes/cinemaHallSeatRoutes';
 import seatRoutes from './routes/seatRoutes';
+import authRoutes from './routes/authRoutes';
 import { errorHandler } from './middlewares/errorHandler';
 import { setupSwagger } from './config/swagger';
 
@@ -20,7 +21,6 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Server is up!');
 });
 
-
 app.use('/movies', movieRoutes);
 app.use('/movies/:movieId/screenings', movieScreeningRoutes);
 app.use('/screenings', screeningRoutes);
@@ -28,6 +28,8 @@ app.use('/cinema-halls', cinemaHallRoutes);
 app.use('/cinema-halls/:cinemaHallId/screenings', cinemaHallScreeningRoutes);
 app.use('/cinema-halls/:cinemaHallId/seats', cinemaHallSeatRoutes);
 app.use('/seats', seatRoutes);
+
+app.use('/', authRoutes);
 
 app.use(errorHandler);
 

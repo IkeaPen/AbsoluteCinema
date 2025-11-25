@@ -16,7 +16,7 @@ export const errorHandler = (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
+  ) => {
   let handledError = err;
   if (err instanceof Prisma.PrismaClientKnownRequestError) {
     handledError = handlePrismaError(err);
