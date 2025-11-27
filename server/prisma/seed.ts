@@ -7,7 +7,7 @@ async function main() {
     data: {
       username: "alice",
       email: "alice@example.com",
-      passwordHash: "hashed_password_1",
+      password: "hashed_password_1",
     },
   });
 
@@ -15,7 +15,7 @@ async function main() {
     data: {
       username: "bob",
       email: "bob@example.com",
-      passwordHash: "hashed_password_2",
+      password: "hashed_password_2",
     },
   });
 

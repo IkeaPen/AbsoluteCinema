@@ -40,7 +40,7 @@ export const movieController = {
     try {
       const id = validateIdParse(req.params.id, "movie ID");
 
-      const newMovie = await movieService.updateMovie(Number(req.params.id), req.body);
+      const newMovie = await movieService.updateMovie(id, req.body);
       return res.status(200).json(newMovie);
     } catch (error) {
       next(error);

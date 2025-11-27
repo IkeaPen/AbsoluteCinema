@@ -1,6 +1,8 @@
 import { createError } from "../middlewares/errorHandler";
 import { movieService } from "../services/movieService";
 import { cinemaHallService } from "../services/cinemaHallService";
+import { screeningService } from "../services/screeningService";
+import { seatService } from "../services/seatService";
 //import { screeningService } from "../services/screeningService";
 
 export function validateIdParse(id: unknown, label = "ID"): number {
@@ -26,10 +28,17 @@ export const idParseAndExistenceValidators = {
     return id;
   },
 
-  /*async screeningId(screeningId: unknown) {
+  async screeningId(screeningId: unknown) {
     const id = validateIdParse(screeningId, "screening ID");
     const screeningExists = await screeningService.checkScreeningExists(id);
     if (!screeningExists) throw createError("Screening not found", 404);
     return id;
-  },*/
+  },
+
+  async seatId(seatId: unknown) {
+    const id = validateIdParse(seatId, "seat ID");
+    const seatExists = await seatService.checkSeatExists(id);
+    if (!seatExists) throw createError("Seat not found", 404);
+    return id;
+  },
 };

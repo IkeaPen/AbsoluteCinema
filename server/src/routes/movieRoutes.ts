@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { movieController } from '../controllers/movieController';
+import { adminOnly, authHandler } from '../middlewares/authHandler';
 
 const router = Router();
 
@@ -111,8 +112,8 @@ const router = Router();
  */
 router.get('/', movieController.getMovies);
 router.get('/:id', movieController.getMovieById);
-router.post('/', movieController.createMovie);
-router.put('/:id', movieController.updateMovie);
-router.delete('/:id', movieController.deleteMovie);
+router.post('/', authHandler, adminOnly, movieController.createMovie);
+router.put('/:id', authHandler, adminOnly, movieController.updateMovie);
+router.delete('/:id', authHandler, adminOnly, movieController.deleteMovie);
 
 export default router;

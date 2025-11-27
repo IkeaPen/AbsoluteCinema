@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { screeningController } from '../controllers/screeningController';
+import { adminOnly, authHandler } from '../middlewares/authHandler';
 
 const router = Router();
 
@@ -111,8 +112,8 @@ const router = Router();
  */
 router.get('/', screeningController.getScreenings);
 router.get('/:id', screeningController.getScreeningById);
-router.post('/', screeningController.createScreening);
-router.put('/:id', screeningController.updateScreening);
-router.delete('/:id', screeningController.deleteScreening);
+router.post('/', authHandler, adminOnly, screeningController.createScreening);
+router.put('/:id', authHandler, adminOnly, screeningController.updateScreening);
+router.delete('/:id', authHandler, adminOnly, screeningController.deleteScreening);
 
 export default router;

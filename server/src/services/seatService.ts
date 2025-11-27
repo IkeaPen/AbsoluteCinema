@@ -46,6 +46,17 @@ export const seatService = {
     });
   },
 
+  async checkSeatExists(id: number) {
+    return prisma.seat.findUnique({ 
+      where: { 
+        id: id 
+      },
+      select: { 
+        id: true 
+      },
+    });
+  },
+
   /*async getCinemaHallSeatById(cinemaHallId: number, id: number) {
     return prisma.seat.findFirst({
       where: {

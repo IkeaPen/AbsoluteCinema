@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { seatController } from '../controllers/seatController';
+import { adminOnly, authHandler } from '../middlewares/authHandler';
 
 const router = Router();
 
@@ -113,10 +114,10 @@ const router = Router();
  *       404:
  *         description: Record not found
  */
-router.get('/', seatController.getSeats);
-router.get('/:id', seatController.getSeatById);
-router.post('/', seatController.createSeat);
-router.put('/:id', seatController.updateSeat);
-router.delete('/:id', seatController.deleteSeat);
+router.get('/', authHandler, seatController.getSeats);
+router.get('/:id', authHandler, seatController.getSeatById);
+router.post('/', authHandler, adminOnly, seatController.createSeat);
+router.put('/:id', authHandler, adminOnly, seatController.updateSeat);
+router.delete('/:id', authHandler, adminOnly, seatController.deleteSeat);
 
 export default router;

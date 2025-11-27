@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { cinemaHallController } from '../controllers/cinemaHallController';
+import { adminOnly, authHandler } from '../middlewares/authHandler';
 
 const router = Router();
 
@@ -111,8 +112,8 @@ const router = Router();
  */
 router.get('/', cinemaHallController.getCinemaHalls);
 router.get('/:id', cinemaHallController.getCinemaHallById);
-router.post('/', cinemaHallController.createCinemaHall);
-router.put('/:id', cinemaHallController.updateCinemaHall);
-router.delete('/:id', cinemaHallController.deleteCinemaHall);
+router.post('/', authHandler, adminOnly, cinemaHallController.createCinemaHall);
+router.put('/:id', authHandler, adminOnly, cinemaHallController.updateCinemaHall);
+router.delete('/:id', authHandler, adminOnly, cinemaHallController.deleteCinemaHall);
 
 export default router;

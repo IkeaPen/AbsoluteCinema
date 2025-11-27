@@ -9,11 +9,22 @@ import seatRoutes from './routes/seatRoutes';
 import authRoutes from './routes/authRoutes';
 import { errorHandler } from './middlewares/errorHandler';
 import { setupSwagger } from './config/swagger';
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import screeningTicketRoutes from './routes/screeningTicketRoutes';
+import ticketRoutes from './routes/ticketRoutes';
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 setupSwagger(app);
 
@@ -24,10 +35,12 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/movies', movieRoutes);
 app.use('/movies/:movieId/screenings', movieScreeningRoutes);
 app.use('/screenings', screeningRoutes);
+app.use('/screenings/:screeningId/seats', screeningTicketRoutes);
 app.use('/cinema-halls', cinemaHallRoutes);
 app.use('/cinema-halls/:cinemaHallId/screenings', cinemaHallScreeningRoutes);
 app.use('/cinema-halls/:cinemaHallId/seats', cinemaHallSeatRoutes);
 app.use('/seats', seatRoutes);
+app.use('/tickets', ticketRoutes);
 
 app.use('/', authRoutes);
 

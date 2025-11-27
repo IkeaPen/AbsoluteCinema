@@ -78,8 +78,24 @@ model TicketType {
 model User {
   id            Int         @id @default(autoincrement())
   username      String      @unique @db.VarChar(255)
-  passwordHash  String      @db.VarChar(255)
+  password      String      @db.VarChar(255)
   email         String      @unique @db.VarChar(255)
   creationDate  DateTime    @default(now()) @db.Timestamp(6)
   tickets       Ticket[]
+  role          UserRole    @default(USER)
+  refreshTokens RefreshToken[]
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+model RefreshToken {
+  id            Int        @id @default(autoincrement())
+  token         String     @unique
+  userId        Int
+  user          User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt     DateTime   @default(now())
+  expiresAt     DateTime
 }

@@ -71,11 +71,11 @@ export const screeningController = {
     }
   },
 
-  async getCinemaHallScreenings(req: Request, res: Response, next: NextFunction) {
+  async getCinemaHallScreeningsWithMovie(req: Request, res: Response, next: NextFunction) {
     try {
       const cinemaHallId = await idParseAndExistenceValidators.cinemaHallId(req.params.cinemaHallId);
       
-      const allCinemaHallScreenings = await screeningService.getCinemaHallScreenings(cinemaHallId);
+      const allCinemaHallScreenings = await screeningService.getCinemaHallScreeningsWithMovie(cinemaHallId);
       res.json(allCinemaHallScreenings);
     } catch (error) {
       next(error);

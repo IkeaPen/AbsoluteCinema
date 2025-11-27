@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { seatController } from '../controllers/seatController';
+import { authHandler } from '../middlewares/authHandler';
 
 const router = Router({ mergeParams: true });
 
@@ -31,7 +32,7 @@ const router = Router({ mergeParams: true });
  *       404:
  *         description: Cinema hall not found
  */
-router.get('/', seatController.getCinemaHallSeats);
+router.get('/', authHandler, seatController.getCinemaHallSeats);
 //router.get('/:id', seatController.getCinemaHallSeatById);
 //router.post('/', seatController.createCinemaHallSeat);
 //router.put('/:id', seatController.updateCinemaHallSeat);

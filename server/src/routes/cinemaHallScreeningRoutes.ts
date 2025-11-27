@@ -31,6 +31,6 @@ const router = Router({ mergeParams: true });
  *       404:
  *         description: Cinema hall not found
  */
-router.get('/', screeningController.getCinemaHallScreenings);
+router.get('/', screeningController.getCinemaHallScreeningsWithMovie);
 
 export default router;

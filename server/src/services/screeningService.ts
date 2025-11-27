@@ -46,12 +46,26 @@ export const screeningService = {
     })
   },
 
-  async getCinemaHallScreenings(cinemaHallId: number) {
+  async getCinemaHallScreeningsWithMovie(cinemaHallId: number) {
     return prisma.screening.findMany({
       where: {
         cinemaHallId: cinemaHallId
+      },
+      include: {
+        movie: true
       }
     })
+  },
+
+  async checkScreeningExists(id: number) {
+    return prisma.screening.findUnique({ 
+      where: { 
+        id: id 
+      },
+      select: { 
+        id: true 
+      },
+    });
   },
 
   /*
