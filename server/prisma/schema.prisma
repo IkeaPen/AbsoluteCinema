@@ -20,6 +20,7 @@ model Movie {
   studio        String      @db.VarChar(255)
   description   String?     @db.Text
   releaseDate   DateTime    @db.Timestamp(6)
+  imageUrl      String?     @db.VarChar(500)
   screenings    Screening[]
 }
 
