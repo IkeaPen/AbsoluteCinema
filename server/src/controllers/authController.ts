@@ -4,7 +4,21 @@ import { createError } from '../middlewares/errorHandler';
 import { createAccessToken, createRefreshToken, verifyRefreshToken } from '../utils/jwt';
 import { User } from '@prisma/client';
 
+type UserReturnType = Omit<User, 'id' | 'password'>;
+
 export const authController = {
+
+  async getUser(req: Request, res: Response, next: NextFunction) {
+    try {
+      const userInfo = await authService.getUser(req.user!.user_id);
+      if (!userInfo) throw createError("Could not get user", 400);
+      
+      const userReturnInfo: UserReturnType = {username: userInfo.username, email: userInfo.email, role: userInfo.role, creationDate: userInfo.creationDate};
+      return res.status(201).json(userReturnInfo);
+    } catch (error) {
+      next(error);
+    }
+  },
 
   async createUser(req: Request, res: Response, next: NextFunction) {
     try {
@@ -14,7 +28,8 @@ export const authController = {
       if (usernameExists) throw createError("User already exists", 409);
       
       const newUser = await authService.createUser(req.body);
-      return res.status(201).json({ id: newUser.id, username: newUser.username, email: newUser.email });
+      const userReturnInfo: UserReturnType = {username: newUser.username, email: newUser.email, role: newUser.role, creationDate: newUser.creationDate};
+      return res.status(201).json(userReturnInfo);
     } catch (error) {
       next(error);
     }
@@ -32,7 +47,8 @@ export const authController = {
 
       await createTokenCookies(res, user);
       
-      return res.status(200).json({ id: user.id, username: user.username, email: user.email });
+      const userReturnInfo: UserReturnType = {username: user.username, email: user.email, role: user.role, creationDate: user.creationDate};
+      return res.status(200).json(userReturnInfo);
     } catch (error) {
       next(error);
     }
@@ -58,10 +74,10 @@ export const authController = {
   async refreshUser(req: Request, res: Response, next: NextFunction) {
     try {
       const refreshToken = req.cookies?.refreshToken;
-      if (!refreshToken) return next(createError("No refresh token", 403));
+      if (!refreshToken) return next(createError("Unauthorized", 401));
 
       const stored = await authService.findRefreshToken(refreshToken);
-      if (!stored) return next(createError("Invalid or reused refresh token", 403));
+      if (!stored) return next(createError("Unauthorized", 401));
       
       const userInfo = verifyRefreshToken(refreshToken);
 
@@ -70,10 +86,10 @@ export const authController = {
 
       await createTokenCookies(res, user);
 
-      return res.status(200).json({ message: "Token refreshed" });
-
+      const userReturnInfo: UserReturnType = {username: user.username, email: user.email, role: user.role, creationDate: user.creationDate};
+      return res.status(200).json(userReturnInfo);
     } catch (err) {
-      return next(createError("Invalid refresh token", 403));
+      return next(createError("Unauthorized", 401));
     }
   }
 };

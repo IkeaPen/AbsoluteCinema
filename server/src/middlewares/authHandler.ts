@@ -18,7 +18,7 @@ export function authHandler(req: Request, res: Response, next: NextFunction) {
       return next(createError("ACCESS_EXPIRED", 403));
     }
     else {
-      return next(createError("Invalid token", 403));
+      return next(createError("Unauthorized", 401));
     }
   }
 }

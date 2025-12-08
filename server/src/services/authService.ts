@@ -4,6 +4,14 @@ import bcrypt from "bcrypt";
 
 export const authService = {
  
+  async getUser(user_id: number) {
+    return prisma.user.findUnique({
+      where: { 
+        id: user_id 
+      }
+    });
+  },
+  
   async createUser(userData: Prisma.UserCreateInput) {
     const hashedPassword = await bcrypt.hash(userData.password, 10);
 

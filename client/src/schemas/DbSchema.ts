@@ -6,7 +6,7 @@ export const MovieSchema = z.object({
   studio: z.string().max(255),
   description: z.string().nullable(),
   releaseDate: z.iso.datetime(),
-  imageUrl: z.string().url().nullable(),
+  imageUrl: z.url().nullable(),
 });
 
 export type Movie = z.infer<typeof MovieSchema>;
@@ -77,19 +77,20 @@ export const TicketSchema = z.object({
 
 export type Ticket = z.infer<typeof TicketSchema>;
 
-export const TicketCreateSchema = TicketSchema.omit({id: true});
+export const TicketCreateSchema = TicketSchema.omit({id: true, purchaseDate: true, userId: true});
 export type TicketCreateDTO = z.infer<typeof TicketCreateSchema>;
 
 
 export const UserSchema = z.object({
-  id: z.number().int().positive(),
-  username: z.string().max(255),
-  email: z.string().email().max(255),
+  username: z.string().max(80, "Username characters limit is 80").min(3, "Username must be at least 3 characters"),
+  email: z.email("Invalid email").max(255),
   creationDate: z.iso.datetime(),
   role: z.enum(["USER", "ADMIN"]),
 });
 
 export type User = z.infer<typeof UserSchema>;
 
-export const UserCreateSchema = UserSchema.omit({id: true});
+export const UserCreateSchema = UserSchema.omit({creationDate: true, role: true}).extend({password: z.string().max(80, "Password characters limit is 80").min(6, "Password must be at least 6 characters")});
 export type UserCreateDTO = z.infer<typeof UserCreateSchema>;
+export const UserLoginSchema = UserSchema.omit({creationDate: true, role: true, email: true}).extend({password: z.string().max(80, "Password characters limit is 80").min(6, "Password must be at least 6 characters")});
+export type UserLoginDTO = z.infer<typeof UserLoginSchema>;

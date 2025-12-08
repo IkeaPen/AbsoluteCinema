@@ -1,13 +1,21 @@
+import { useNavigate } from "react-router";
+
 export default function HomePage() {
-  return <>
-  <h2 className="text-2xl">Home Page</h2>
-  <p>
-    Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-    when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-    It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-    It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-    and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-  </p>
-  </>
+  const navigate = useNavigate();
+  
+  return (
+    <div className="min-h-[60vh] flex flex-col items-center justify-center px-6">
+      <h1 className="text-4xl font-bold mb-10">Welcome</h1>
+
+      <div className="flex flex-col gap-6 w-full max-w-sm">
+        <button onClick={() => navigate('/movies/airing')} className="w-full py-4 rounded-xl bg-sky-900 hover:bg-sky-800 text-lg font-semibold shadow cursor-pointer">
+          Airing Movies
+        </button>
+
+        <button onClick={() => navigate('/movies/by-date')} className="w-full py-4 rounded-xl bg-teal-800 hover:bg-teal-700 text-lg font-semibold shadow cursor-pointer">
+          Movies by Screening Dates
+        </button>
+      </div>
+    </div>
+  );
 }

@@ -6,7 +6,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="bg-gray-800 text-white p-4 flex justify-between items-center relative">
+    <header className="bg-black/50 text-white p-4 flex justify-between items-center relative">
       <div style={{ fontFamily: "Science Gothic" }} className="text-xl font-bold">Absolute Cinema</div>
       
       <nav className="hidden md:flex gap-4">
