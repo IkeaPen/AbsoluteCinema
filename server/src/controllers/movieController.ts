@@ -26,6 +26,26 @@ export const movieController = {
       next(error);
     }
   },
+
+  async getAiringMovies(req: Request, res: Response, next: NextFunction) {
+    try {
+      const airingMovies = await movieService.getAiringMovies();
+      res.json(airingMovies);
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  async getMoviesByScreeningDate(req: Request, res: Response, next: NextFunction) {
+    try {
+      const selectedDate = req.query.date;
+      if (!selectedDate) throw createError("No selected date", 400);
+      const filteredMovies = await movieService.getMoviesByScreeningDate(new Date(selectedDate as string));
+      res.json(filteredMovies);
+    } catch (error) {
+      next(error);
+    }
+  },
   
   async createMovie(req: Request, res: Response, next: NextFunction) {
     try {

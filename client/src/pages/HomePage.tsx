@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router";
+import { useAuth } from "../components/AuthProvider";
 
 export default function HomePage() {
   const navigate = useNavigate();
+  const { user } = useAuth()!;
   
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center px-6">
@@ -12,9 +14,15 @@ export default function HomePage() {
           Airing Movies
         </button>
 
-        <button onClick={() => navigate('/movies/by-date')} className="w-full py-4 rounded-xl bg-teal-800 hover:bg-teal-700 text-lg font-semibold shadow cursor-pointer">
+        <button onClick={() => navigate('/movies/by-screening-date')} className="w-full py-4 rounded-xl bg-teal-800 hover:bg-teal-700 text-lg font-semibold shadow cursor-pointer">
           Movies by Screening Dates
         </button>
+
+        {user?.role === "ADMIN" &&
+          <button onClick={() => navigate('/movies')} className="w-full py-4 rounded-xl bg-sky-900 hover:bg-sky-800 text-lg font-semibold shadow cursor-pointer">
+            All Movies
+          </button>
+        }
       </div>
     </div>
   );

@@ -4,13 +4,29 @@ import { validateIdParse, idParseAndExistenceValidators } from '../validators/id
 import { createError } from '../middlewares/errorHandler';
 
 export const ticketController = {
-  
-  async getScreeningBoughtSeatIds(req: Request, res: Response, next: NextFunction) {
+
+  async getTickets(req: Request, res: Response, next: NextFunction) {
     try {
-      const screeningId = await idParseAndExistenceValidators.screeningId(req.params.screeningId);
-      
-      const allBoughtSeats = await ticketService.getScreeningBoughtSeats(screeningId);
-      res.json(allBoughtSeats);
+      const allTickets = await ticketService.getTickets();
+      res.json(allTickets);
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  async getTicketTypes(req: Request, res: Response, next: NextFunction) {
+    try {
+      const allTicketTypes = await ticketService.getTicketTypes();
+      res.json(allTicketTypes);
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  async getUserTickets(req: Request, res: Response, next: NextFunction) {
+    try {
+      const allUserTickets = await ticketService.getUserTickets(req.user!.user_id);
+      res.json(allUserTickets);
     } catch (error) {
       next(error);
     }
@@ -28,20 +44,13 @@ export const ticketController = {
       next(error);
     }
   },
-
-  async getTickets(req: Request, res: Response, next: NextFunction) {
+  
+  async getScreeningBoughtSeatIds(req: Request, res: Response, next: NextFunction) {
     try {
-      const allTickets = await ticketService.getTickets();
-      res.json(allTickets);
-    } catch (error) {
-      next(error);
-    }
-  },
-
-  async getUserTicketsWithScreeningAndMovie(req: Request, res: Response, next: NextFunction) {
-    try {
-      const allUserTickets = await ticketService.getUserTicketsWithScreeningAndMovie(req.user!.user_id);
-      res.json(allUserTickets);
+      const screeningId = await idParseAndExistenceValidators.screeningId(req.params.screeningId);
+      
+      const allBoughtSeats = await ticketService.getScreeningBoughtSeats(screeningId);
+      res.json(allBoughtSeats);
     } catch (error) {
       next(error);
     }

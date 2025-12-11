@@ -11,8 +11,30 @@ export const screeningService = {
     return prisma.screening.findFirst({
       where: {
         id: id
+      },
+      include: {
+        movie: true,
+        cinemaHall: {
+          include: { seats: true }
+        },
+        tickets: true 
       }
     })
+  },
+
+  async getMovieScreeningsByDate(movieId: number, selectedDate: Date) {
+    return prisma.screening.findMany({
+      where: {
+        movieId: movieId,
+        date: {
+          gte: selectedDate,
+          lt: new Date(selectedDate.getTime() + 24 * 60 * 60 * 1000)
+        }
+      },
+      include: {
+        cinemaHall: true
+      }
+    });
   },
  
   async createScreening(screeningData: Prisma.ScreeningCreateInput) {

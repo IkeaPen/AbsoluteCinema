@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { screeningController } from '../controllers/screeningController';
+import { movieController } from '../controllers/movieController';
 
 const router = Router({ mergeParams: true });
 
@@ -32,5 +33,6 @@ const router = Router({ mergeParams: true });
  *         description: Movie not found
  */
 router.get('/', screeningController.getMovieScreenings);
+router.get('/by-date', screeningController.getMovieScreeningsByDate);
 
 export default router;

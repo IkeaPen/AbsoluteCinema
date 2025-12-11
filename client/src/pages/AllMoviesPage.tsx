@@ -4,16 +4,16 @@ import type { Movie } from "../schemas/DbSchema";
 import LoadingSpinner from "../components/LoadingSpinner";
 import MovieBox from "../components/MovieBox";
 
-export default function AiringMoviesPage() {
+export default function AllMoviesPage() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
 
   async function fetchAiringMovies() {
     try {
-      const res = await api.get("/movies/airing");
+      const res = await api.get("/movies");
       setMovies(res.data);
     } catch (err) {
-      console.log("Could not fetch airing movies:", err);
+      console.log("Could not fetch movies:", err);
     } finally {
       setLoading(false);
     }
@@ -31,7 +31,7 @@ export default function AiringMoviesPage() {
 
   return (
     <div className="py-6 px-10">
-      <h1 className="text-3xl font-bold mb-6">Now Airing</h1>
+      <h1 className="text-3xl font-bold mb-6">All Movies</h1>
 
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {movies.length === 0 ?

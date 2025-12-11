@@ -111,6 +111,8 @@ const router = Router();
  *         description: Record not found
  */
 router.get('/', movieController.getMovies);
+router.get('/airing', movieController.getAiringMovies);
+router.get('/by-screening-date', movieController.getMoviesByScreeningDate);
 router.get('/:id', movieController.getMovieById);
 router.post('/', authHandler, adminOnly, movieController.createMovie);
 router.put('/:id', authHandler, adminOnly, movieController.updateMovie);

@@ -20,8 +20,27 @@ export const screeningController = {
 
       const screeningById = await screeningService.getScreeningById(id);
       if (!screeningById) throw createError("Screening not found", 404);
+      const seats = screeningById.cinemaHall.seats.map(seat => ({
+        id: seat.id,
+        row: seat.row,
+        number: seat.number,
+        isBooked: screeningById.tickets.some(t => t.seatId === seat.id)
+      }));
       
-      res.json(screeningById);
+      res.json({...screeningById, seats});
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  async getMovieScreeningsByDate(req: Request, res: Response, next: NextFunction) {
+    try {
+      const id = validateIdParse(req.params.movieId, "movie ID");
+      const selectedDate = req.query.date;
+      if (!selectedDate) throw createError("No selected date", 400);
+      
+      const screenings = await screeningService.getMovieScreeningsByDate(id, new Date(selectedDate as string));
+      res.json(screenings);
     } catch (error) {
       next(error);
     }

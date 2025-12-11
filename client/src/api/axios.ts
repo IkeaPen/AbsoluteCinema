@@ -39,7 +39,7 @@ api.interceptors.response.use(
           isRefreshing = false;
           pendingRequests = [];
 
-          if (error.config.url !== "/me") {
+          if (error.config.url !== "/me" && window.location.pathname !== "/login") {
             window.location.href = "/login";
           }
           return Promise.reject(err);
@@ -52,7 +52,7 @@ api.interceptors.response.use(
     }
 
     if (error.response?.status === 401) {
-      if (error.config.url !== "/me") {
+      if (error.config.url !== "/me" && window.location.pathname !== "/login") {
         window.location.href = "/login";
       }
     }
