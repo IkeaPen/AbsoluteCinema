@@ -66,8 +66,18 @@ export const authController = {
       await authService.deleteUserRefreshTokens(session.userId);
     }
     
-    res.clearCookie("accessToken");
-    res.clearCookie("refreshToken");
+    res.clearCookie("accessToken", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      path: "/", 
+    });
+    res.clearCookie("refreshToken", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      path: "/", 
+    });
     return res.status(200).json({ message: "Logged out" });
   },
 
