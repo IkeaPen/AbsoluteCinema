@@ -101,7 +101,7 @@ export default function ScreeningRegisterPage() {
       <SeatSelector seats={screening.seats} chosenSeat={chosenSeat} setChosenSeat={setChosenSeat} />
       
       <h2 className="text-2xl font-semibold mt-12 mb-2">Select ticket type:</h2>
-      <TicketSelector ticketTypes={ticketTypes} chosenTicketType={chosenTicketType} setChosenTicketType={setChosenTicketType} />
+      <TicketSelector ticketTypes={ticketTypes} chosenTicketType={chosenTicketType} setChosenTicketType={setChosenTicketType} priceRatio={screening.priceRatio} />
 
       
       <button onClick={() => postTicket()} disabled={!validPurchase} className={`mt-3 mb-2 px-4 py-2 rounded-lg ${validPurchase ? "bg-green-800/80 hover:bg-green-800/60 cursor-pointer" : "bg-gray-600/80 text-gray-400"}`}>
