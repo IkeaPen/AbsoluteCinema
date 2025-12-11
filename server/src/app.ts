@@ -16,12 +16,13 @@ import ticketRoutes from './routes/ticketRoutes';
 
 const app = express();
 const port = process.env.PORT || 3000;
+const frontURL = process.env.FRONT_URL || "http://localhost:5173";
 
 app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: frontURL,
     credentials: true,
   })
 );

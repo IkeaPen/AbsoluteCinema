@@ -1,13 +1,15 @@
 import axios from "axios";
 import { type User } from "../schemas/DbSchema";
 
+const backURL = import.meta.env.VITE_BACK_URL || "http://localhost:3000";
+
 let onUserRefresh: ((user: User) => void) | null = null;
 export function setUserRefreshHandler(fn: (user: User) => void) {
   onUserRefresh = fn;
 }
 
 export const api = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: backURL,
   withCredentials: true,
 });
 
