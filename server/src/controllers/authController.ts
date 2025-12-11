@@ -108,7 +108,7 @@ export async function createTokenCookies(res: Response, user: User) {
   res.cookie("accessToken", newAccessToken, {
     httpOnly: true,
     secure: true,
-    sameSite: "strict",
+    sameSite: "none",
     maxAge: expiresAt,
     path: "/", 
   });
@@ -116,7 +116,7 @@ export async function createTokenCookies(res: Response, user: User) {
   res.cookie("refreshToken", newRefreshToken, {
     httpOnly: true,
     secure: true,
-    sameSite: "strict",
+    sameSite: "none",
     maxAge: expiresAt,
     path: "/",
   });
