@@ -39,6 +39,49 @@ const router = Router();
  *               $ref: '#/components/schemas/Movie'
  *       400:
  *         description: Missing or invalid field in request body.
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
+ * /movies/airing:
+ *   get:
+ *     summary: Get all currently airing movies
+ *     description: Returns movies that have at least one screening scheduled today or in the future.
+ *     tags:
+ *       - Movies
+ *     responses:
+ *       200:
+ *         description: A list of currently airing movies.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Movie'
+ * /movies/by-screening-date:
+ *   get:
+ *     summary: Get movies by screening date
+ *     description: Returns movies that have screenings on the specified date.
+ *     tags:
+ *       - Movies
+ *     parameters:
+ *       - in: query
+ *         name: date
+ *         required: true
+ *         schema:
+ *           type: string
+ *           format: date
+ *     responses:
+ *       200:
+ *         description: List of movies with screenings on the given date.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Movie'
+ *       400:
+ *         description: No date was provided or the date was invalid.
  * /movies/{id}:
  *   get:
  *     summary: Get a movie by ID
@@ -86,6 +129,10 @@ const router = Router();
  *               $ref: '#/components/schemas/Movie'
  *       400:
  *         description: Invalid movie ID
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
  *       404:
  *         description: Record not found
  *   delete:
@@ -107,6 +154,10 @@ const router = Router();
  *               $ref: '#/components/schemas/Movie'
  *       400:
  *         description: Invalid movie ID
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
  *       404:
  *         description: Record not found
  */

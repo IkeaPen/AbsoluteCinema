@@ -20,6 +20,10 @@ const router = Router();
  *               type: array
  *               items:
  *                 $ref: '#/components/schemas/Seat'
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
  *   post:
  *     summary: Create a new seat
  *     tags:
@@ -39,6 +43,10 @@ const router = Router();
  *               $ref: '#/components/schemas/Seat'
  *       400:
  *         description: Missing or invalid field in request body.
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
  *       409:
  *         description: Duplicate entry violates unique constraint
  * /seats/{id}:
@@ -61,6 +69,10 @@ const router = Router();
  *               $ref: '#/components/schemas/Seat'
  *       400:
  *         description: Invalid seat ID
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
  *       404:
  *         description: Seat not found
  *   put:
@@ -88,6 +100,10 @@ const router = Router();
  *               $ref: '#/components/schemas/Seat'
  *       400:
  *         description: Invalid seat ID
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
  *       404:
  *         description: Record not found
  *       409:
@@ -111,6 +127,10 @@ const router = Router();
  *               $ref: '#/components/schemas/Seat'
  *       400:
  *         description: Invalid seat ID
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
  *       404:
  *         description: Record not found
  */

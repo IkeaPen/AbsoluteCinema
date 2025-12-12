@@ -29,6 +29,10 @@ const router = Router({ mergeParams: true });
  *                 $ref: '#/components/schemas/Seat'
  *       400:
  *         description: Invalid cinema hall ID
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
  *       404:
  *         description: Cinema hall not found
  */

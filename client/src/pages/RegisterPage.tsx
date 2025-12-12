@@ -18,7 +18,7 @@ export default function Register() {
     setRegisterError(null);
     const ok = await authRegister(data, setRegisterError);
     if (ok) {
-      navigate('/'); // redirect to homepage or desired route after successful registration
+      navigate('/');
     }
   };
 

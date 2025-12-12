@@ -95,7 +95,7 @@ const options: swaggerJSDoc.Options = {
             },
             },
 
-            /*Ticket: {
+            Ticket: {
             type: "object",
             properties: {
                 id: { type: "integer" },
@@ -107,7 +107,7 @@ const options: swaggerJSDoc.Options = {
                 seatId: { type: "integer" },
             },
             },
-            TicketInput: {
+            /*TicketInput: {
             type: "object",
             required: ["finalPrice", "userId", "screeningId", "ticketTypeId", "seatId"],
             properties: {
@@ -117,7 +117,7 @@ const options: swaggerJSDoc.Options = {
                 ticketTypeId: { type: "integer" },
                 seatId: { type: "integer" },
             },
-            },
+            },*/
 
             TicketType: {
             type: "object",
@@ -127,25 +127,25 @@ const options: swaggerJSDoc.Options = {
                 description: { type: "string", example: "Standard ticket" },
             },
             },
-            TicketTypeInput: {
+            /*TicketTypeInput: {
             type: "object",
             required: ["price", "description"],
             properties: {
                 price: { type: "number" },
                 description: { type: "string" },
             },
-            },
+            },*/
 
-            User: {
+            UserReturn: {
             type: "object",
             properties: {
-                id: { type: "integer" },
+                role: { type: "string", example: "ADMIN" },
                 username: { type: "string", example: "john_doe" },
                 email: { type: "string", example: "john@example.com" },
                 creationDate: { type: "string", format: "date-time" },
             },
             },
-            UserInput: {
+            /*UserInput: {
             type: "object",
             required: ["username", "passwordHash", "email"],
             properties: {

@@ -39,6 +39,10 @@ const router = Router();
  *               $ref: '#/components/schemas/CinemaHall'
  *       400:
  *         description: Missing or invalid field in request body.
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
  * /cinema-halls/{id}:
  *   get:
  *     summary: Get a cinema hall by ID
@@ -86,6 +90,10 @@ const router = Router();
  *               $ref: '#/components/schemas/CinemaHall'
  *       400:
  *         description: Invalid cinema hall ID
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
  *       404:
  *         description: Record not found
  *   delete:
@@ -107,6 +115,10 @@ const router = Router();
  *               $ref: '#/components/schemas/CinemaHall'
  *       400:
  *         description: Invalid cinema hall ID
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
  *       404:
  *         description: Record not found
  */
