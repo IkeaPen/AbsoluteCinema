@@ -11,29 +11,28 @@ Administratoriai prižiūri puslapio tvarką – prideda/keičia/ištrina filmus
 <br></br>
 
 ###	FUNKCINIAI REIKALAVIMAI
-####	Neregistruoto naudotojo funkciniai reikalavimai:
-* Peržiūrėti kine rodomus filmus.
-* Peržiūrėti rodomų filmų seansus.
-* Užregistruoti paskyrą.
+####	Neprisijungusio naudotojo funkciniai reikalavimai:
+*	Peržiūrėti kine rodomus filmus.
+*	Peržiūrėti rodomų filmų seansus.
+*	Užregistruoti paskyrą.
+*	Prisijungti prie savo paskyros.
 
-####	Registruoto naudotojo funkciniai reikalavimai:
-* Prisijungti prie savo paskyros.
-* Atsijungti nuo savo paskyros.
-* Peržiūrėti rodomus filmus.
-* Peržiūrėti rodomų filmų seansus.
-* Peržiūrėti filmo seanso siūlomų bilietų tipus su kainomis.
-* Peržiūrėti filmo seanso sėdimas vietas.
-* Išsirinkti bilieto tipą.
-* Išsirinkti laisvą sėdimą vietą.
-* Nusipirkti bilietą.
-* Peržiūrėti savo nupirktus bilietus.
+####	Prisijungusio naudotojo funkciniai reikalavimai:
+*	Tas pats, kas aukščiau aprašyta.
+*	Atsijungti nuo savo paskyros.
+*	Peržiūrėti filmo seanso siūlomų bilietų tipus su kainomis.
+*	Peržiūrėti filmo seanso sėdimas vietas.
+*	Išsirinkti bilieto tipą.
+*	Išsirinkti laisvą sėdimą vietą.
+*	Nusipirkti bilietą.
+*	Peržiūrėti savo nupirktus bilietus.
 
 ####	Administratoriaus funkciniai reikalavimai:
-* Pridėti filmą, jo seansus ar bilietų tipus.
-* Redaguoti filmą, jo seansus ar bilietų tipus.
-* Ištrinti filmą, jo seansus ar bilietų tipus.
-* Atšaukti naudotojų bilietus.
-* Ištrinti naudotojų paskyras.
+*	Tas pats, kas aukščiau aprašyta.
+*	Matyti visus filmus, ne tik rodomus šiuo metu.
+*	Pridėti filmus.
+*	Pridėti filmų seansus.
+*	Redaguoti filmą.
 <br></br>
 
 ##	PASIRINKTŲ TECHNOLOGIJŲ APRAŠYMAS
