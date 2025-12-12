@@ -39,10 +39,11 @@ Administratoriai prižiūri puslapio tvarką – prideda/keičia/ištrina filmus
 Sistemos sudedamosios dalys: 
 * Kliento pusė (angl. Front-End) – naudojamas React.js su Vite.
 * Serverio pusė (angl. Back-End) – naudojamas Express.js, o duomenų bazei naudojamas PostgreSQL.
-* Diegimo serveris (angl. Deployment) – naudojamas Render.
+* Diegimo serveris (angl. Deployment) – naudojamas DigitalOcean ir Supabase.
 
-Visos dalys – kliento pusė (angl. Front-End), serverio pusė (angl. Back-End) ir duomenų bazė – yra diegiamos tame pačiame Render serveryje. Tam pavaizduoti yra sukurtas diegimo grafikas:
+Kliento pusė (angl. Front-End) ir serverio pusė (angl. Back-End) yra diegiamos tame pačiame DigitalOcean serveryje, o duomenų bazė – Supabase serveryje. Tam pavaizduoti yra sukurtas diegimo grafikas:
 
-<img width="674" alt="image" src="https://github.com/user-attachments/assets/ac457047-796d-4dd8-ad8f-c63667d06a24" />
+<img width="674" height="513" alt="image" src="https://github.com/user-attachments/assets/402178ef-c438-4f4d-90e5-32f105d03dfb" />
+
 
  
